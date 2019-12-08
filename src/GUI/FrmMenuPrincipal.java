@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import GUI.autos.panelAuto;
 import GUI.cliente.panelCliente;
 import javax.swing.JOptionPane;
 
@@ -17,10 +18,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmMenuPrincipal
      */
+    
+    
+    panelCliente pc;
+    panelAuto pa;
+    
     public FrmMenuPrincipal() {
         initComponents();
         principal.setLayout(new java.awt.BorderLayout());
-        panelCliente pc = new panelCliente();
+        pc = new panelCliente();
+        pa = new panelAuto();
         principal.add(pc);
     }
 
@@ -41,10 +48,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         principal = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu7 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        clienteM = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        autoM = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -95,23 +102,39 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 510, Short.MAX_VALUE)
         );
 
-        jMenu7.setText("Cliente");
-        jMenuBar1.add(jMenu7);
-
-        jMenu3.setText("Autos");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+        clienteM.setText("Cliente");
+        clienteM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
+                clienteMActionPerformed(evt);
             }
         });
 
-        jMenuItem5.setText("Ingresar");
-        jMenu3.add(jMenuItem5);
+        jMenuItem1.setText("Abrir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        clienteM.add(jMenuItem1);
 
-        jMenu1.setText("Actualizar");
-        jMenu3.add(jMenu1);
+        jMenuBar1.add(clienteM);
 
-        jMenuBar1.add(jMenu3);
+        autoM.setText("Autos");
+        autoM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                autoMActionPerformed(evt);
+            }
+        });
+
+        jMenuItem2.setText("Abrir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        autoM.add(jMenuItem2);
+
+        jMenuBar1.add(autoM);
 
         jMenu8.setText("Servicios");
 
@@ -159,6 +182,25 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    // 0 = cliente, 1 = auto
+    private void cambiarSeccion( int seccion ) {
+        principal.remove(0);
+        switch(seccion) {
+            case 0 : {
+                principal.add(pc);
+                break;
+            }
+            case 1 : {
+                principal.add(pa);
+                break;
+            }
+            
+        }
+        
+        principal.revalidate();
+    }
+    
     private void jMenu10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu10ActionPerformed
         // TODO add your handling code here:
        
@@ -169,24 +211,29 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
          System.exit(0);
     }//GEN-LAST:event_jMenu10MouseClicked
 
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+    private void autoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autoMActionPerformed
         // TODO add your handling code here:
     
        
-    }//GEN-LAST:event_jMenu3ActionPerformed
+    }//GEN-LAST:event_autoMActionPerformed
+
+    private void clienteMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteMActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_clienteMActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        cambiarSeccion(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        cambiarSeccion(1);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     
-    public void actualizarT() {
-        Cliente c = new Cliente();
-        try {
-//            tabla.setModel(c.verRegistros());
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
-        
-    }
+    
     /**
      * @param args the command line arguments
      */
@@ -224,19 +271,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu autoM;
+    private javax.swing.JMenu clienteM;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;

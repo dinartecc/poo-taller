@@ -30,6 +30,10 @@ public class panelCliente extends javax.swing.JPanel {
         panelBuscar.setLayout(new java.awt.BorderLayout());
         panelEditar.setLayout(new java.awt.BorderLayout());
         
+        
+        
+        textId.setEnabled(false);
+        
         //titulos del buscar
         String [] titulos = {"ID", "NOMBRE", "NUMERO", "TIPO", "EDAD", "CEDULA", "RUC", "CREDITO", "DIRECCION"};
         
@@ -297,7 +301,11 @@ public class panelCliente extends javax.swing.JPanel {
                     + ", cedula = '" + pr.getCedula()+"'" ;
             cond = "id = " + textId.getText();
 
-            Utils.actualizarTabla("persona", valores, cond);
+            if (Utils.actualizarTabla("persona", valores, cond) < 0 ) {
+                System.out.println("algo no se inserto");
+            };
+            
+            pr.limpiarInput();
 
             mb.actualizarTabla();
         }
@@ -324,6 +332,8 @@ public class panelCliente extends javax.swing.JPanel {
             cond = "id = " + textId.getText();
 
             Utils.actualizarTabla("empresa", valores, cond);
+            
+            er.limpiarInput();
 
             mb.actualizarTabla();
             

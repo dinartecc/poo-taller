@@ -139,16 +139,16 @@ public class registrarNuevoC extends javax.swing.JFrame {
                 String valoresP[] = {"'"+pr.getNombre()+"'", pr.getTel() ,"'"+pr.getDir()+"'", "'persona'"};
                 int llave = Utils.insertarTabla("cliente", columnasP, valoresP);
 
-                if( llave == 0) {
-                    System.out.println("XD error");
+                if( llave == 0 ) {
+                    System.out.println("XD error 1");
                     return;
                 }
 
                 String valoresS[] = {pr.getEdad(), "'"+pr.getCedula()+"'", llave+""};
                 String columnasS[] = {"edad", "cedula", "id"};
 
-                if ( Utils.insertarTabla("persona", columnasS, valoresS) == 0) {
-                    System.out.println("XD error");
+                if ( Utils.insertarTabla("persona", columnasS, valoresS) < 0) {
+                    System.out.println("XD error 2");
                     return;
                 }
 

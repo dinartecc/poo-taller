@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI.autos;
 
 /**
  *
  * @author User
  */
-public class auto extends javax.swing.JPanel {
+public class registroAuto extends javax.swing.JPanel {
 
     /**
-     * Creates new form auto
+     * Creates new form registroAuto
      */
-    public auto() {
+    public registroAuto() {
         initComponents();
     }
 
@@ -27,7 +27,10 @@ public class auto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -36,12 +39,15 @@ public class auto extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+
+        jTextField3.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+
+        jTextField4.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         jLabel1.setText("Matricula:");
+
+        jTextField5.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         jLabel2.setText("Modelo: ");
@@ -70,12 +76,6 @@ public class auto extends javax.swing.JPanel {
 
         jTextField2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-
-        jTextField4.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-
-        jTextField5.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,18 +103,18 @@ public class auto extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(121, 121, 121)
                         .addComponent(jButton1)))
-                .addContainerGap(588, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 80, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addGap(628, 628, 628))
+                .addGap(60, 60, 60))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(54, 54, 54)
                 .addComponent(jLabel6)
-                .addGap(42, 42, 42)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -136,7 +136,7 @@ public class auto extends javax.swing.JPanel {
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jButton1)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
