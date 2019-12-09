@@ -7,6 +7,7 @@ package GUI;
 
 import GUI.autos.panelAuto;
 import GUI.cliente.panelCliente;
+import GUI.tickets.panelTicket;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,12 +23,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     
     panelCliente pc;
     panelAuto pa;
+    panelTicket pt;
     
     public FrmMenuPrincipal() {
         initComponents();
         principal.setLayout(new java.awt.BorderLayout());
         pc = new panelCliente();
         pa = new panelAuto();
+        pt = new panelTicket();
         principal.add(pc);
     }
 
@@ -53,8 +56,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         autoM = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
@@ -138,11 +140,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenu8.setText("Servicios");
 
-        jMenuItem7.setText("Registrar servicio");
-        jMenu8.add(jMenuItem7);
-
-        jMenuItem8.setText("Modificar");
-        jMenu8.add(jMenuItem8);
+        jMenuItem4.setText("Abrir");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem4);
 
         jMenuBar1.add(jMenu8);
 
@@ -195,7 +199,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 principal.add(pa);
                 break;
             }
-            
+            case 2 : {
+                principal.add(pt);
+            }
         }
         
         principal.revalidate();
@@ -231,6 +237,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         cambiarSeccion(1);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        cambiarSeccion(2);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     
     
@@ -284,9 +294,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel principal;
     // End of variables declaration//GEN-END:variables

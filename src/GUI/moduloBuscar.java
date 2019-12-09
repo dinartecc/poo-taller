@@ -27,6 +27,7 @@ public class moduloBuscar extends javax.swing.JPanel {
     private String [] columnas;
     private int numCol;
     public String [] seleccion;
+    private String condicion;
     
     
     public moduloBuscar(String nombreT, String[] columnas) {
@@ -37,6 +38,7 @@ public class moduloBuscar extends javax.swing.JPanel {
         this.columnas = columnas;
         this.numCol = columnas.length;
         this.seleccion = new String[numCol];
+        this.condicion = "";
         
         
         
@@ -53,6 +55,14 @@ public class moduloBuscar extends javax.swing.JPanel {
        lista.setModel(modelo);
         
         
+    }
+
+    public String getCondicion() {
+        return condicion;
+    }
+
+    public void setCondicion(String condicion) {
+        this.condicion = condicion;
     }
 
     /**
@@ -161,7 +171,13 @@ public class moduloBuscar extends javax.swing.JPanel {
     }
     
     public void actualizarTabla() {
-     tabla.setModel(Utils.queryTabla(nombreT, columnas, input.getText(), lista.getSelectedIndex()));   
+     
+     if (condicion == "") {
+         tabla.setModel(Utils.queryTabla(nombreT, columnas, input.getText(), lista.getSelectedIndex()));   
+     }
+     else {
+         tabla.setModel(Utils.queryTabla(nombreT, columnas, input.getText(), lista.getSelectedIndex(), condicion));   
+     }
     }
     
     private void botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActionPerformed

@@ -16,8 +16,45 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Utils {
     
+      public static DefaultTableModel queryTabla( String nombreT, String [] columnas, String buscar, int condicion, String id  ) {
+      DefaultTableModel tabla = new DefaultTableModel();
+      int numCol = columnas.length;
+      try {
+          String tsql = "select * from " + nombreT + " where "+ columnas[condicion] +" like '%" + buscar + "%'" ;
+          tsql += " and " + id;
+          System.out.println(tsql);
+          Conexion conex = new Conexion();
+          ResultSet res;
+          Statement st = null;
+          Connection conn = conex.getConexion();
+          
+          st = conn.createStatement();
+          res = conex.Listar(tsql);
+          
+          
+          tabla.setColumnIdentifiers(columnas);
+          
+          while (res.next()) {
+              Object obj[] = new Object[numCol];
+              for( int i = 0 ; i < numCol ; i ++) {
+                  obj[i] = res.getString( columnas[i] );
+              }
+              tabla.addRow(obj);
+          }
+          
+          
+          
+      }
+      catch (Exception e) {
+          
+      }
+      
+      
+      return tabla;
+  }
+    
   
-    public static DefaultTableModel queryTabla( String nombreT, String [] columnas, String buscar, int condicion ) {
+    public static DefaultTableModel queryTabla( String nombreT, String [] columnas, String buscar, int condicion  ) {
       DefaultTableModel tabla = new DefaultTableModel();
       int numCol = columnas.length;
       try {
