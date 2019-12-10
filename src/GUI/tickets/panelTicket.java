@@ -334,6 +334,7 @@ public class panelTicket extends javax.swing.JPanel {
         return 0;
     }
     
+    
     private void cambiarModCre ( boolean modo ) {
         
         // si se quiere activar el modo crear
@@ -522,11 +523,12 @@ public class panelTicket extends javax.swing.JPanel {
                    System.out.println("no hay servicio seleccionado");
                    return;
                }
+               
                String [] titulosS = {"ID", "NOMBRE", "PRECIO", "COMPLETADO", "DESCRIPCION" };
                id.setText(valores[0]);
                nombre.setText(valores[1]);
                precio.setText(valores[2]);
-               comple.setSelected(valores[3] == "1" ? true: false );
+               comple.setSelected(valores[3].equals("1"));
                desc.setText(valores[4]);
                
                
@@ -614,7 +616,22 @@ public class panelTicket extends javax.swing.JPanel {
         // TODO add your handling code here:
         switch(buscarTabla) {
             case 0 : {
-                System.out.println("NO IMP");
+                
+                String valores[] = mbt.getValores();
+                if (valores[0] == "" ) {
+                    System.out.println("No se selecciono nada");
+                    return;
+                }
+                
+                int reply = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea facturar el ticket?\n"
+                        + "A menos que cancele la factura, no podrá editar los servicios.", "Confirmación", JOptionPane.YES_NO_OPTION);
+                if ( reply == JOptionPane.YES_OPTION ) {
+                    
+                    facturarT ft = new facturarT();
+                    ft.setVisible(true);
+                    ft.setNumTick(valores[0]);
+                    
+                }
                 break;
             }
             case 1 : {

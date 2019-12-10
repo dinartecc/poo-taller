@@ -7,6 +7,7 @@ package GUI;
 
 import GUI.autos.panelAuto;
 import GUI.cliente.panelCliente;
+import GUI.tickets.panelFactura;
 import GUI.tickets.panelTicket;
 import javax.swing.JOptionPane;
 
@@ -24,6 +25,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     panelCliente pc;
     panelAuto pa;
     panelTicket pt;
+    panelFactura pf;
     
     public FrmMenuPrincipal() {
         initComponents();
@@ -31,6 +33,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pc = new panelCliente();
         pa = new panelAuto();
         pt = new panelTicket();
+        pf = new panelFactura();
         principal.add(pc);
     }
 
@@ -57,6 +60,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        factura = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
@@ -140,13 +144,21 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenu8.setText("Servicios");
 
-        jMenuItem4.setText("Abrir");
+        jMenuItem4.setText("Tickets");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
             }
         });
         jMenu8.add(jMenuItem4);
+
+        factura.setText("Factura");
+        factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facturaActionPerformed(evt);
+            }
+        });
+        jMenu8.add(factura);
 
         jMenuBar1.add(jMenu8);
 
@@ -201,7 +213,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
             case 2 : {
                 principal.add(pt);
+                break;
             }
+            case 3 : {
+                principal.add(pf);
+                break;
+            } 
         }
         
         principal.revalidate();
@@ -241,6 +258,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         cambiarSeccion(2);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturaActionPerformed
+        // TODO add your handling code here:
+        cambiarSeccion(3);
+    }//GEN-LAST:event_facturaActionPerformed
 
     
     
@@ -283,6 +305,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu autoM;
     private javax.swing.JMenu clienteM;
+    private javax.swing.JMenuItem factura;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JMenu jMenu10;
