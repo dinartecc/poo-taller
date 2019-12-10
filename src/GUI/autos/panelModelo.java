@@ -16,40 +16,34 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
-public class panelAuto extends javax.swing.JPanel {
+public class panelModelo extends javax.swing.JPanel {
 
     /**
      * Creates new form panelCliente
      */
-      moduloBuscar mba;
-      moduloBuscar mbc;
-      moduloBuscar mbm;
-      String modeloId;
+      moduloBuscar mbma;
+      moduloBuscar mbmo;
+      String marcaId;
       
       boolean modoCrear = false;
       // 0 = auto, 1 == cliente
       int buscarTabla = 0;
       
-    public panelAuto() {
+    public panelModelo() {
         initComponents();
         //incializa los paneles
         panelBuscar.setLayout(new java.awt.BorderLayout());
         
         //titulos del buscar
-        String [] titulosC = {"ID", "NOMBRE", "NUMERO", "TIPO", "EDAD", "CEDULA", "RUC", "CREDITO", "DIRECCION"};
-        String [] titulosA = {"MATRICULA", "MARCA", "MODELO", "AÑO", "CLIENTE", "CLIENTEID", "MODELOID" };
         String [] titulosM = {"ID", "NOMBRE", "MARCA", "MARCAID"};
+        String [] titulosMa= {"ID","NOMBRE"};
         
         //inicializa modulo buscar
-        mbc = new moduloBuscar("clienteFull", titulosC );
-        
-        matri.setEnabled(false);
-        
-        mba = new moduloBuscar("autoFull", titulosA);
-        mbm = new moduloBuscar("modeloFull", titulosM);
+        mbma = new moduloBuscar("marca", titulosMa );
+        mbmo = new moduloBuscar("modeloFull", titulosM);
         
         
-        panelBuscar.add(mba);
+        panelBuscar.add(mbmo);
         
         
         
@@ -72,16 +66,12 @@ public class panelAuto extends javax.swing.JPanel {
         guar = new javax.swing.JButton();
         nuevoA = new javax.swing.JButton();
         modoLabel = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        matri = new javax.swing.JTextField();
-        anyo = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         mar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cliente = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        modelo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout panelBuscarLayout = new javax.swing.GroupLayout(panelBuscar);
@@ -122,7 +112,7 @@ public class panelAuto extends javax.swing.JPanel {
         });
 
         nuevoA.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        nuevoA.setText("Nuevo Auto");
+        nuevoA.setText("Nuevo Modelo");
         nuevoA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoAActionPerformed(evt);
@@ -132,51 +122,41 @@ public class panelAuto extends javax.swing.JPanel {
         modoLabel.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         modoLabel.setText("Editar");
 
-        jLabel5.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel5.setText("Dueño:");
-
-        matri.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        matri.addActionListener(new java.awt.event.ActionListener() {
+        id.setEditable(false);
+        id.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        id.setEnabled(false);
+        id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriActionPerformed(evt);
+                idActionPerformed(evt);
             }
         });
 
-        anyo.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        nombre.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
+        mar.setEditable(false);
         mar.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        mar.setEnabled(false);
+        mar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                marMouseClicked(evt);
+            }
+        });
+        mar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                marKeyPressed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel4.setText("Matricula:");
-
-        cliente.setEditable(false);
-        cliente.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        cliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clienteMouseClicked(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel6.setText("Modelo: ");
+        jLabel4.setText("ID:");
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel7.setText("Año:");
+        jLabel7.setText("Nombre:");
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         jLabel8.setText("Marca:");
 
-        modelo.setEditable(false);
-        modelo.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        modelo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                modeloMouseClicked(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jLabel1.setText("AUTOS");
+        jLabel1.setText("MODELOS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -185,42 +165,35 @@ public class panelAuto extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(17, 17, 17)))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8))
                         .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(matri)
-                                .addComponent(anyo)
-                                .addComponent(mar)
-                                .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(mar)
+                            .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                            .addComponent(nombre)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addComponent(guar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
-                                .addComponent(modoLabel)))))
-                .addGap(76, 76, 76)
+                                .addComponent(modoLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(88, 88, 88)
+                                .addComponent(nuevoA)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(205, 205, 205)
-                .addComponent(nuevoA)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botizq)
                 .addGap(184, 184, 184)
                 .addComponent(botder)
@@ -229,61 +202,46 @@ public class panelAuto extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botizq)
-                    .addComponent(botder)
-                    .addComponent(nuevoA)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botizq)
+                            .addComponent(botder)
+                            .addComponent(nuevoA))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(modoLabel))
-                        .addGap(53, 53, 53)
+                        .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(matri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(anyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(mar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addComponent(guar))
-                    .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7)
+                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(128, 128, 128)
+                        .addComponent(guar)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private int validarInputs() {
-        try {
-           Integer.parseInt(anyo.getText());
-           Integer.parseInt(cliente.getText());
-           
-           if ( matri.getText().equals("") || modelo.getText().equals("") || mar.getText().equals("")  ) {
-               return 0;
-           }
-           
-           return 1;
-           
+
+        if( nombre.getText().equals("") ) {
+            return 0;
         }
-        catch (Exception e) {
-            
-        }
-        return 0;
+        return 1;
     }
     
     private void cambiarModBus( int modo ) {
@@ -299,9 +257,9 @@ public class panelAuto extends javax.swing.JPanel {
                 botizq.setText("Eliminar Seleccion");
                 botder.setText("Editar Seleccion");
 
-                panelBuscar.add(mba);
+                panelBuscar.add(mbmo);
 
-               mba.actualizarTabla();
+               mbmo.actualizarTabla();
                break;
             }
                
@@ -309,21 +267,12 @@ public class panelAuto extends javax.swing.JPanel {
             case 1 : {
                 buscarTabla = 1;
                 botizq.setText("Cancelar Busqueda");
-                botder.setText("Seleccionar Cliente");
+                botder.setText("Seleccionar Marca");
             
-                panelBuscar.add(mbc);
-            
-                mbc.actualizarTabla();
+                panelBuscar.add(mbma);
+           
+                mbma.actualizarTabla();
                 break;
-            }
-            case 2 : {
-                buscarTabla = 2;
-                botizq.setText("Cancelar Busqueda");
-                botder.setText("Seleccionar Modelo");
-                
-                panelBuscar.add(mbm);
-                
-                mbm.actualizarTabla();
             }
         } // de lo contrario se activa
         
@@ -342,15 +291,15 @@ public class panelAuto extends javax.swing.JPanel {
         else {
             int reply = JOptionPane.showConfirmDialog(null, "¿Está seguro que quiere borrar el registro?", "Confirmación", JOptionPane.YES_NO_OPTION);
             if ( reply == JOptionPane.YES_OPTION ) {
-                String elim = mba.getValores()[0];
+                String elim = mbmo.getValores()[0];
 
 
-                if(Utils.eliminarTabla("auto", "matricula = '"+ elim +"'") == 0) {
+                if(Utils.eliminarTabla("modelo", "id = " + elim) == 0) {
                     System.out.println("ELIM");
                 }
 
                 limpiar();
-                mba.actualizarTabla();
+                mbmo.actualizarTabla();
 
             }
             
@@ -365,7 +314,7 @@ public class panelAuto extends javax.swing.JPanel {
        switch ( buscarTabla ) {
            case 0: {
                
-               String valores [] = mba.getValores();
+               String valores [] = mbmo.getValores();
                //Si no selecciona nada, no hace nada ex
                if(valores[0] == "") {
                    System.out.println("No hay nada selec");
@@ -377,37 +326,25 @@ public class panelAuto extends javax.swing.JPanel {
                modoLabel.setText("Editar");
                
                //pone la matricula que no se pueda cambiar
-               matri.setText(valores[0]);
-               matri.setEnabled(false);
-               
-               mar.setText(valores[1]);
-               modelo.setText(valores[2]);
-               anyo.setText(valores[3]);
-               cliente.setText(valores[5]);
+               id.setText(valores[0]);
+               id.setEnabled(false);
+               nombre.setText(valores[1]);
+               mar.setText(valores[2]);
+
+               marcaId = valores[3];
                
                  
                break;
            }
            case 1: {
                // Si no selecciona nada, no hace nada xd
-               if (mbc.getValores()[0] == "" ) {
+               if (mbma.getValores()[0] == "" ) {
                    System.out.println("NO SE PUEDE XD");
                }
                
-               String id = mbc.getValores()[0];
-               cliente.setText(id);
-           
-               cambiarModBus( 0 );
-           }
-           case 2 : {
-               if (mbm.getValores()[0] == "" ) {
-                   System.out.println("NO SE PUEDE XD");
-               }
-               
-               String [] valores = mbm.getValores();
-               modelo.setText(valores[ 1]);
-               modeloId = valores[0];
-               mar.setText(valores[2]);
+               String id = mbma.getValores()[1];
+               marcaId = mbma.getValores()[0]; 
+               mar.setText(id);
            
                cambiarModBus( 0 );
            }
@@ -418,10 +355,8 @@ public class panelAuto extends javax.swing.JPanel {
     }//GEN-LAST:event_botderActionPerformed
 
     private void limpiar() {
-        matri.setText("");
-        modelo.setText("");
-        anyo.setText("");
-        cliente.setText("");
+        id.setText("");
+        nombre.setText("");
         mar.setText("");
     }
 
@@ -436,10 +371,10 @@ public class panelAuto extends javax.swing.JPanel {
         if (modoCrear) {
             
            
-            String columnas[] = {"matricula", "modeloId", "anyo", "clienteId"};
-            String valores[] = {"'"+matri.getText()+"'", modeloId , anyo.getText() , cliente.getText()};
+            String columnas[] = {"nombre", "marcaId"};
+            String valores[] = { "'"+ nombre.getText() +"'" ,marcaId};
             
-            if(Utils.insertarTabla("auto", columnas, valores) < 0 ) {
+            if(Utils.insertarTabla("modelo", columnas, valores) < 0 ) {
                 System.out.println("algo no se inserto");
                 return;
             }
@@ -451,12 +386,12 @@ public class panelAuto extends javax.swing.JPanel {
         //Si se esta editando
         else {
             
-            String valores = "modeloId = " + modeloId
-                   + ", anyo =" + anyo.getText() + ", clienteId = " + cliente.getText();
+            String valores = "marcaId = " + marcaId
+                   + ", nombre = '" + nombre.getText() + "'";
            
-           String condicion = "matricula = '" +  matri.getText() +  "'";
+           String condicion = "id = "+  id.getText() ;
            
-           if (Utils.actualizarTabla("auto", valores, condicion) == 0) {
+           if (Utils.actualizarTabla("modelo", valores, condicion) == 0) {
                System.out.println ("error al update");
                return;
            };
@@ -476,42 +411,40 @@ public class panelAuto extends javax.swing.JPanel {
     private void nuevoAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoAActionPerformed
         modoCrear = true;
         modoLabel.setText("Crear");
-        matri.setEnabled(true);
+        limpiar();
     }//GEN-LAST:event_nuevoAActionPerformed
 
-    private void matriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriActionPerformed
+    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_matriActionPerformed
+    }//GEN-LAST:event_idActionPerformed
 
-    private void clienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteMouseClicked
+    private void marKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_marKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_marKeyPressed
+
+    private void marMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_marMouseClicked
+        // TODO add your handling code here:
         cambiarModBus(1);
-    }//GEN-LAST:event_clienteMouseClicked
-
-    private void modeloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modeloMouseClicked
-        cambiarModBus(2);
-    }//GEN-LAST:event_modeloMouseClicked
+    }//GEN-LAST:event_marMouseClicked
 
 
 
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField anyo;
     private javax.swing.JButton botder;
     private javax.swing.JButton botizq;
-    private javax.swing.JTextField cliente;
     private javax.swing.JButton guar;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField mar;
-    private javax.swing.JTextField matri;
-    private javax.swing.JTextField modelo;
     private javax.swing.JLabel modoLabel;
+    private javax.swing.JTextField nombre;
     private javax.swing.JButton nuevoA;
     private javax.swing.JPanel panelBuscar;
     // End of variables declaration//GEN-END:variables

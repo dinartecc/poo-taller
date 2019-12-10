@@ -7,6 +7,8 @@ package GUI;
 
 import GUI.aplicacion.panelUsuario;
 import GUI.autos.panelAuto;
+import GUI.autos.panelMarca;
+import GUI.autos.panelModelo;
 import GUI.cliente.panelCliente;
 import GUI.tickets.panelFactura;
 import GUI.tickets.panelTicket;
@@ -28,6 +30,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     panelTicket pt;
     panelFactura pf;
     panelUsuario pu;
+    panelMarca pma;
+    panelModelo pmo;
     
     String usuario;
     
@@ -39,6 +43,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pt = new panelTicket();
         pf = new panelFactura();
         pu = new panelUsuario();
+        pma = new panelMarca();
+        pmo = new panelModelo();
         principal.add(pc);
         
 //        apli.setVisible(false);
@@ -66,6 +72,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         clienteM = new javax.swing.JMenu();
         autoM = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        modelo = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         factura = new javax.swing.JMenuItem();
@@ -106,13 +114,29 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem2.setText("Abrir");
+        jMenuItem2.setText("Auto");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         autoM.add(jMenuItem2);
+
+        jMenuItem1.setText("Marca");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        autoM.add(jMenuItem1);
+
+        modelo.setText("Modelo");
+        modelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modeloActionPerformed(evt);
+            }
+        });
+        autoM.add(modelo);
 
         jMenuBar1.add(autoM);
 
@@ -202,6 +226,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 principal.add(pu);
                 break;
             }
+            case 5 : {
+                principal.add(pma);
+                break;
+            }
+            case 6 : {
+                principal.add(pmo);
+                break;
+            }
         }
         
         principal.revalidate();
@@ -251,6 +283,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         cambiarSeccion(0);
     }//GEN-LAST:event_clienteMMouseClicked
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        cambiarSeccion(5);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void modeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeloActionPerformed
+        // TODO add your handling code here:
+        cambiarSeccion(6);
+    }//GEN-LAST:event_modeloActionPerformed
+
     
     
     /**
@@ -297,9 +339,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem modelo;
     private javax.swing.JPanel principal;
     // End of variables declaration//GEN-END:variables
 }
