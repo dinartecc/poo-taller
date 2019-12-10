@@ -40,7 +40,7 @@ create table Modelo (
 
 create table Auto ( 
 	matricula varchar (10) primary key,
-	modeloId id not null,
+	modeloId int not null,
 	anyo int,
 	clienteId int,
 	constraint FK_A_C foreign key (clienteId) references Cliente (id),

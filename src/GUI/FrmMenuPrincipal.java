@@ -47,7 +47,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pmo = new panelModelo();
         principal.add(pc);
         
-//        apli.setVisible(false);
+        apli.setVisible(false);
     }
 
     public void setUsuario(String u) {
