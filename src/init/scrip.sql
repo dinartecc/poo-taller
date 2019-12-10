@@ -25,15 +25,30 @@ create table Empresa (
 	CONSTRAINT FK_C_E foreign key (id  ) references Cliente(id) on delete cascade
 );
 
+create table Marca (
+	id int identity (1,1) primary key,
+	nombre varchar(20)
+);
+
+
+create table Modelo (
+	nombre varchar(20),
+	id int identity (1,1) primary key,
+	marcaId int not null,
+	constraint FK_M_M foreign key (marcaId) references marca(id)
+);
+
 create table Auto ( 
 	matricula varchar (10) primary key,
-	modelo varchar (20),
-	marca varchar (20),
+	modeloId id not null,
 	anyo int,
-	clienteId int
-	constraint FK_A_C foreign key (clienteId) references Cliente (id)
+	clienteId int,
+	constraint FK_A_C foreign key (clienteId) references Cliente (id),
+	constraint FK_A_M foreign key (modeloId) references Modelo(id)
 	
 );
+
+
 
 create table Ticket (
 	id int identity (1,1) primary key,
@@ -78,17 +93,27 @@ left join Persona as p on C.id = P.id
 left join empresa as e on C.id = e.Id);
 
 create view AutoFull as (
-select MATRICULA, MODELO, MARCA, ANYO as 'AÑO', Nombre as 'CLIENTE', id as 'CLIENTEID' from Auto as a 
-join Cliente as c on a.clienteId = c.id
+	select MATRICULA, ma.nombre as 'MARCA', mo.nombre as 'MODELO', ANYO as 'AÑO', c.Nombre as 'CLIENTE', c.id as 'CLIENTEID', modeloId as 'MODELOID' from Auto as a 
+	join Cliente as c on a.clienteId = c.id
+	join Modelo as mo on mo.id = a.modeloId
+	join Marca as ma on ma.id = mo.marcaId
 );
 
+create view ModeloFull as (
+	select mo.id 'ID', mo.nombre as 'NOMBRE', ma.nombre as 'MARCA', ma.id as 'MARCAID' from 
+	Modelo as mo 
+	join Marca as ma on ma.id = mo.marcaId
+);
+
+
+
 create view TicketFull as (
-select t.id as 'ID', fechaCreacion, fechaFinalizacion, a.matricula as 'MATRICULA', c.nombre as 'CLIENTE', count(s.id) as 'CantidadServicios' 
-from ticket as t	 
-left join servicio as s on t.id = s.ticketId 
-join auto as a on t.matricula = a.matricula
-join cliente as c on a.clienteId = c.id
-group by t.id, fechaCreacion, fechaFinalizacion, a.matricula, c.nombre
+	select t.id as 'ID', fechaCreacion, fechaFinalizacion, a.matricula as 'MATRICULA', c.nombre as 'CLIENTE', count(s.id) as 'CantidadServicios' 
+	from ticket as t	 
+	left join servicio as s on t.id = s.ticketId 
+	join auto as a on t.matricula = a.matricula
+	join cliente as c on a.clienteId = c.id
+	group by t.id, fechaCreacion, fechaFinalizacion, a.matricula, c.nombre
 );
 
 
