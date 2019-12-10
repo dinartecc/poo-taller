@@ -5,6 +5,10 @@
  */
 package conexion;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -15,6 +19,32 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class Utils {
+    
+    public static String hashear (String ori) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        
+
+        // Change this to UTF-16 if needed
+        md.update(ori.getBytes(StandardCharsets.UTF_8));
+        byte[] digest = md.digest();
+
+        String hex = String.format("%064x", new BigInteger(1, digest));
+        
+        System.out.println(ori);
+        System.out.println(hex);
+        return hex;
+    
+    } 
+    
+    private static String bytesToHex(byte[] hash) {
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < hash.length; i++) {
+        String hex = Integer.toHexString(0xff & hash[i]);
+        if(hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
     
       public static DefaultTableModel queryTabla( String nombreT, String [] columnas, String buscar, int condicion, String id  ) {
       DefaultTableModel tabla = new DefaultTableModel();

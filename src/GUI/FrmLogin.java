@@ -5,7 +5,12 @@
  */
 package GUI;
 
+import conexion.Utils;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +23,24 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
+        String columnas[] = {"usuario"};
+        DefaultTableModel tabla = Utils.queryTabla("usuario", columnas, "", 0, "usuario = 'admin'");
+        if(tabla.getRowCount() == 0) {
+            String insert[] = {"usuario", "contrasena"};
+            String hashed;
+            try {
+                hashed = Utils.hashear("123");
+            } catch (NoSuchAlgorithmException ex) {
+                return;
+            }
+            
+            String valores[] = {"'admin'", "'"+ hashed +"'" };
+
+            if(Utils.insertarTabla("usuario", insert, valores) < 0 ) {
+                System.out.println("algo no se inserto");
+                return;
+            }
+        }
     }
 
     /**
@@ -63,6 +86,16 @@ public class FrmLogin extends javax.swing.JFrame {
         });
 
         txtPassword.setFont(new java.awt.Font("Gadugi", 0, 12)); // NOI18N
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
+            }
+        });
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,22 +150,49 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        // TODO add your handling code here:
+    public void entrar() {
         
-        String usuario = "admin"; 
-        String contra = "123";
-        String pass = new String (txtPassword.getPassword());
+        String columnas[] = {"usuario"};
+        String pass = new String (txtPassword.getPassword()),
+                usuario = txtUsuario.getText();
+        String hashed;
+        try {
+             hashed = Utils.hashear(pass);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error critico");
+            return;
+        }
         
-        if (txtUsuario.getText().equals(usuario) && pass.equals(contra)) {
+        DefaultTableModel tabla = Utils.queryTabla("usuario", columnas, "", 0, "usuario = '" + usuario + "' and contrasena = '" + hashed +"'");
+        
+        
+        
+        if (tabla.getRowCount() == 0 ) {
+            JOptionPane.showMessageDialog(this, "Usuario o Contraseña invalida");
+        }
+        else {
+            
             FrmMenuPrincipal f = new FrmMenuPrincipal();
+            f.setUsuario(usuario);
             f.setVisible(true);
             dispose();
         }
-        else {
-            JOptionPane.showMessageDialog(this, "Usuario o Contraseña invalida");
-        }
+    }
+    
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+        entrar();
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+        entrar();
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments

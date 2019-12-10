@@ -6,6 +6,8 @@
 package GUI.tickets;
 
 import GUI.moduloBuscar;
+import conexion.Utils;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,12 +20,12 @@ public class panelFactura extends javax.swing.JPanel {
      */
     
     moduloBuscar mbf;
+    String usuario;
     public panelFactura() {
         initComponents();
          //titulos del buscar
         panelBuscar.setLayout(new java.awt.BorderLayout());
         String [] titulosF = {"NUMEROFAC", "FECHA", "MONTO", "CANCELADO", "MATRICULA", "CLIENTE", "CLIENTEID", "TICKET"};
-        
         //inicializa modulo buscar
         mbf = new moduloBuscar("FacturaFull", titulosF );
         panelBuscar.add(mbf);
@@ -42,7 +44,7 @@ public class panelFactura extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         anular = new javax.swing.JButton();
-        anular1 = new javax.swing.JButton();
+        imprimir = new javax.swing.JButton();
 
         javax.swing.GroupLayout panelBuscarLayout = new javax.swing.GroupLayout(panelBuscar);
         panelBuscar.setLayout(panelBuscarLayout);
@@ -67,10 +69,10 @@ public class panelFactura extends javax.swing.JPanel {
             }
         });
 
-        anular1.setText("Imprimir Factura");
-        anular1.addActionListener(new java.awt.event.ActionListener() {
+        imprimir.setText("Imprimir Factura");
+        imprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anular1ActionPerformed(evt);
+                imprimirActionPerformed(evt);
             }
         });
 
@@ -88,7 +90,7 @@ public class panelFactura extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(anular1)
+                            .addComponent(imprimir)
                             .addComponent(anular))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(panelBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,18 +109,53 @@ public class panelFactura extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(anular1)
+                        .addComponent(imprimir)
                         .addGap(35, 35, 35)
                         .addComponent(anular)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void setUsuario(String u) {
+        usuario = u;
+        if ( !(usuario.equals("admin")) ) {
+            anular.setEnabled(false);
+        }
+    }
+    
     private void anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anularActionPerformed
         // TODO add your handling code here:
+        
+         
+        
+        String valores[] = mbf.getValores();
+        if (valores[0] == "" ) {
+            System.out.println("seleccione algo");
+            return;   
+        }
+        
+        int reply = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea anular la factura?\n", "Confirmación", JOptionPane.YES_NO_OPTION);
+         if ( reply == JOptionPane.NO_OPTION ) {
+                    return;
+         }
+        
+        if  (valores[3] == "Si") {
+            JOptionPane.showMessageDialog(null, "Ya esta anulada esa factura!");
+        }
+        
+        
+        
+        if( Utils.actualizarTabla("factura", "cancelado = 1", "numFac = " + valores[0] ) == 0 ) {
+            System.out.println("error");
+            return;
+        }
+        
+        mbf.actualizarTabla();
+        
     }//GEN-LAST:event_anularActionPerformed
 
-    private void anular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anular1ActionPerformed
+    private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
         // TODO add your handling code here:
         String valores[] = mbf.getValores();
         if (valores[0] == "" ) {
@@ -128,12 +165,12 @@ public class panelFactura extends javax.swing.JPanel {
         imprimirFactura impf = new imprimirFactura();
         impf.imprimir(valores);
         impf.setVisible(true);
-    }//GEN-LAST:event_anular1ActionPerformed
+    }//GEN-LAST:event_imprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anular;
-    private javax.swing.JButton anular1;
+    private javax.swing.JButton imprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel panelBuscar;

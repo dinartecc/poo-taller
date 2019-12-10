@@ -28,7 +28,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="anular1" min="-2" max="-2" attributes="0"/>
+                          <Component id="imprimir" min="-2" max="-2" attributes="0"/>
                           <Component id="anular" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -53,7 +53,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" pref="154" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="anular1" min="-2" max="-2" attributes="0"/>
+                      <Component id="imprimir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="anular" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -100,12 +100,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anularActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="anular1">
+    <Component class="javax.swing.JButton" name="imprimir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Imprimir Factura"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anular1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="imprimirActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

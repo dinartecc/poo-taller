@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import GUI.aplicacion.panelUsuario;
 import GUI.autos.panelAuto;
 import GUI.cliente.panelCliente;
 import GUI.tickets.panelFactura;
@@ -26,6 +27,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     panelAuto pa;
     panelTicket pt;
     panelFactura pf;
+    panelUsuario pu;
+    
+    String usuario;
     
     public FrmMenuPrincipal() {
         initComponents();
@@ -34,9 +38,20 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         pa = new panelAuto();
         pt = new panelTicket();
         pf = new panelFactura();
+        pu = new panelUsuario();
         principal.add(pc);
+        
+//        apli.setVisible(false);
     }
 
+    public void setUsuario(String u) {
+        usuario = u;
+        pf.setUsuario(usuario);
+        if (usuario.equals("admin") ) {
+            apli.setVisible(true);
+        } 
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,54 +61,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jFrame1 = new javax.swing.JFrame();
-        jFrame2 = new javax.swing.JFrame();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
         principal = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         clienteM = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         autoM = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         factura = new javax.swing.JMenuItem();
-        jMenu9 = new javax.swing.JMenu();
+        apli = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
-
-        jMenuItem3.setText("jMenuItem3");
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
-        jFrame2.getContentPane().setLayout(jFrame2Layout);
-        jFrame2Layout.setHorizontalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame2Layout.setVerticalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jMenuItem6.setText("jMenuItem6");
-
-        jMenuItem12.setText("jMenuItem12");
-
-        jMenu4.setText("jMenu4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,20 +87,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         );
 
         clienteM.setText("Cliente");
+        clienteM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clienteMMouseClicked(evt);
+            }
+        });
         clienteM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clienteMActionPerformed(evt);
             }
         });
-
-        jMenuItem1.setText("Abrir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        clienteM.add(jMenuItem1);
-
         jMenuBar1.add(clienteM);
 
         autoM.setText("Autos");
@@ -162,12 +136,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu8);
 
-        jMenu9.setText("Aplicación");
+        apli.setText("Aplicación");
 
         jMenuItem9.setText("Administrar Usuario");
-        jMenu9.add(jMenuItem9);
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        apli.add(jMenuItem9);
 
-        jMenuBar1.add(jMenu9);
+        jMenuBar1.add(apli);
 
         jMenu10.setText("Salir");
         jMenu10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -199,7 +178,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    // 0 = cliente, 1 = auto
+    // 0 = cliente, 1 = auto, 2 = tickets, 3 = factura, 4 = usuario
     private void cambiarSeccion( int seccion ) {
         principal.remove(0);
         switch(seccion) {
@@ -219,6 +198,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 principal.add(pf);
                 break;
             } 
+            case 4 : {
+                principal.add(pu);
+                break;
+            }
         }
         
         principal.revalidate();
@@ -245,11 +228,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_clienteMActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        cambiarSeccion(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         cambiarSeccion(1);
@@ -263,6 +241,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         cambiarSeccion(3);
     }//GEN-LAST:event_facturaActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        cambiarSeccion(4);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void clienteMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clienteMMouseClicked
+        // TODO add your handling code here:
+        cambiarSeccion(0);
+    }//GEN-LAST:event_clienteMMouseClicked
 
     
     
@@ -303,22 +290,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu apli;
     private javax.swing.JMenu autoM;
     private javax.swing.JMenu clienteM;
     private javax.swing.JMenuItem factura;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JFrame jFrame2;
     private javax.swing.JMenu jMenu10;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel principal;
     // End of variables declaration//GEN-END:variables

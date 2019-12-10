@@ -8,6 +8,7 @@ package GUI.tickets;
 import GUI.moduloBuscar;
 import conexion.Utils;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -152,6 +153,7 @@ public class facturarT extends javax.swing.JFrame {
         String columnas[] = { "clienteId", "ticketId" };
 
         Utils.insertarTabla("factura", columnas, enviar);
+        JOptionPane.showMessageDialog(null, "Ticket facturado exitosamente. Revise en sección factura");
         this.dispose();
     }//GEN-LAST:event_selecActionPerformed
 

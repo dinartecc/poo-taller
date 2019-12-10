@@ -12,6 +12,7 @@ import GUI.cliente.empresaRegistrar;
 import GUI.moduloBuscar;
 import conexion.Utils;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -365,6 +366,7 @@ public class panelTicket extends javax.swing.JPanel {
                 botizq.setText("Eliminar Seleccion");
                 botder.setText("Editar Servicios");
                 botcen.setText("Facturar");
+                nuevo.setText("Nuevo Ticket");
 
                 panelBuscar.add(mbt);
                 titulo.setText("TICKETS");
@@ -396,14 +398,55 @@ public class panelTicket extends javax.swing.JPanel {
                 mbs.setCondicion("ticketId = " + ticket.getText() );
                 titulo.setText("SERVICIOS");
                 
-                 nombre.setEnabled(true);
-                precio.setEnabled(true);
-                desc.setEnabled(true);
-                comple.setEnabled(true);
                 
-                //dactiva botones que se usan
-                nuevo.setEnabled(true);
-                botcen.setEnabled(true);
+                String columnas[] = {"NUM", "ANU"};
+                try {
+                    DefaultTableModel tabla = Utils.queryTabla("facturasCanceladas", columnas, "", 0, "ticketId = " +  ticket.getText()  );
+                
+                    int num = Integer.parseInt(tabla.getValueAt(0, 0).toString()),
+                         anu = Integer.parseInt(tabla.getValueAt(0, 1).toString());
+
+                    //verifica que no haya una factura actica
+                    if (num == 0 || anu == num ) {
+                        nombre.setEnabled(true);
+                        precio.setEnabled(true);
+                        desc.setEnabled(true);
+                        comple.setEnabled(true);
+
+                        //dactiva botones que se usan
+                        nuevo.setEnabled(true);
+                        botcen.setEnabled(true);
+
+                    }
+                    else {
+                        nombre.setEnabled(false);
+                        precio.setEnabled(false);
+                        desc.setEnabled(false);
+                        comple.setEnabled(true);
+
+                        //dactiva botones que se usan
+                        nuevo.setEnabled(false);
+                        botcen.setEnabled(true);
+
+                    }
+                }
+                catch (Exception e ) {
+                    nombre.setEnabled(true);
+                    precio.setEnabled(true);
+                    desc.setEnabled(true);
+                    comple.setEnabled(true);
+
+                    //dactiva botones que se usan
+                    nuevo.setEnabled(true);
+                    botcen.setEnabled(true);
+                }
+                
+                
+                
+                
+                
+                
+                
             
                 mbs.actualizarTabla();
                 break;
@@ -622,6 +665,28 @@ public class panelTicket extends javax.swing.JPanel {
                     System.out.println("No se selecciono nada");
                     return;
                 }
+                
+                //VERIFICA SI HAY ALGUNA FACTURA ACTIVA
+                String columnas[] = {"NUM", "ANU"};
+                try {
+                    DefaultTableModel tabla = Utils.queryTabla("facturasCanceladas", columnas, "", 0, "ticketId = " + valores[0] );
+                
+                    int num = Integer.parseInt(tabla.getValueAt(0, 0).toString()),
+                         anu = Integer.parseInt(tabla.getValueAt(0, 1).toString());
+
+                    //verifica que no haya una factura actica
+                    if (num == 0 || anu == num ) {
+                        
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null, "Ya hay una factura para ese ticket!");
+                        return; 
+                    }
+                }
+                catch (Exception e ){
+                    
+                }
+                
                 
                 int reply = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea facturar el ticket?\n"
                         + "A menos que cancele la factura, no podrá editar los servicios.", "Confirmación", JOptionPane.YES_NO_OPTION);

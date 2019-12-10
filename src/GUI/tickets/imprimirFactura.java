@@ -35,7 +35,7 @@ public class imprimirFactura extends javax.swing.JFrame {
         tex = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tex.setEditable(false);
         tex.setColumns(20);
@@ -92,7 +92,7 @@ public class imprimirFactura extends javax.swing.JFrame {
         DefaultTableModel tabla = Utils.queryTabla("servicio", columnas, "", 0  , id);
         int cantidadS = tabla.getRowCount();
         
-        texto += "FACTURA"+ infoFac[0] + (infoFac[3].equals("Si") ? "\n++++ANULADA++++" : "" )
+        texto += "FACTURA #"+ infoFac[0] + (infoFac[3].equals("Si") ? "\n++++ANULADA++++" : "" )
                + "\nFECHA: " + infoFac[1]
                + "\nCLIENTE: " + infoFac[5]
                + "\nID CLIENTE: " + infoFac[6]
